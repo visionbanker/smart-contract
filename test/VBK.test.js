@@ -3,7 +3,7 @@ contract('VBKToken', accounts => {
   let token;
   const creator = accounts[0];
   beforeEach(async function () {
-    token = await VBK.new("VBKToken", "VBK", 18, { from: creator });
+    token = await VBK.new({ from: creator });
   });
   it('has a name', async function () {
     const name = await token.name();
@@ -14,8 +14,8 @@ contract('VBKToken', accounts => {
     assert.equal(symbol, 'VBK');
   });
   it('has 18 decimals', async function () {
-    const decimals = await token.decimals;
-    assert(decimals, 18);
+    const decimals = await token.decimals();
+    assert.equal(decimals, 18);
   });
   it('assigns the initial total supply to the creator', async function () {
     const totalSupply = await token.totalSupply();
